@@ -1,6 +1,7 @@
 package com.briup.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -51,9 +52,8 @@ public class LinkServiceImpl implements ILinkService{
 	@Override
 	public Link findById(Integer id){
 		// TODO Auto-generated method stub
-		Link link = null;
-	
-		link = linkDao.findById(id).get();
+		Optional<Link> opt = linkDao.findById(id);
+		Link link = opt.isPresent()?opt.get():null;
 	
 		return link;
 		
@@ -61,7 +61,7 @@ public class LinkServiceImpl implements ILinkService{
 	}
 
 	@Override
-	public void deleteById(Integer id){
+	public void deleteById(Integer id) throws CustomerException{
 		// TODO Auto-generated method stub
 		/*try {
 			linkDao.deleteById(id);
@@ -69,13 +69,20 @@ public class LinkServiceImpl implements ILinkService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		try {
+		//linkDao.findById(id).get();
+		/*try {
 			linkDao.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
 			// TODO Auto-generated catch block
 			throw new CustomerException(500, "id不存在");
+		}*/
+		Optional<Link> opt = linkDao.findById(id);
+		Link link = opt.isPresent()?opt.get():null;
+		if(link!=null) {
+			linkDao.deleteById(id);
+		}else {
+			throw new CustomerException(500,"该id在数据库中不存在");
 		}
-		
 	}
 
 }

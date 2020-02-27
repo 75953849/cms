@@ -58,14 +58,15 @@ public class LinkController {
 			return MessageUtil.error(500, "id不存在");
 		}*/
 		
-		try {
+		/*try {
 			Link link = linkService.findById(id);
 			return MessageUtil.success(link);
 		} catch (CustomerException e) {
 			// TODO: handle exception
 			return MessageUtil.error(e.getCode(), e.getMessage());
-		}
-
+		}*/
+		Link link = linkService.findById(id);
+		return MessageUtil.success(link);
 	}
 	
 	@GetMapping("/deleteById")
