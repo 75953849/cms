@@ -69,7 +69,6 @@ public class CategoryServiceImpl implements ICategoryService{
 		Optional<Category> opt = categoryDao.findById(id);
 		Category category = opt.isPresent()?opt.get():null;
 		if(category!=null) {
-			System.out.println(category.getArticles());
 			return category;
 		}else {
 			throw new Exception("该id在数据库中不存在");

@@ -32,9 +32,9 @@ public class Category {
 	@ApiModelProperty(value="栏目名称",required=true)
 	private String name;
 	
-	@OneToMany(mappedBy="category",cascade=CascadeType.REMOVE)
+/*	@OneToMany(mappedBy="category",cascade=CascadeType.REMOVE)
 	@JsonIgnore
-	private List<Article> articles;
+	private List<Article> articles;*/
 	
 
 	public Category() {}
@@ -52,13 +52,6 @@ public class Category {
 		this.name = name;
 	}
 
-	public List<Article> getArticles() {
-		return articles;
-	}
-
-	public void setArticles(List<Article> articles) {
-		this.articles = articles;
-	}
 
 	public Integer getId() {
 		return id;

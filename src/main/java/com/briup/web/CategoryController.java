@@ -54,8 +54,7 @@ public class CategoryController {
 	
 	@PutMapping("/saveOrUpdate")
 	@ApiOperation("保存或更新栏目信息")
-	public Message<String> saveOrUpdate(@RequestParam(required=false) Integer id,String name,long code){
-		Category category = new Category(id, code, name);
+	public Message<String> saveOrUpdate(Category category){
 		Message<String> message = null;
 		try {
 			categoryService.saveOrUpdate(category);
